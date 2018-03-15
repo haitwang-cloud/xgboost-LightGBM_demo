@@ -10,15 +10,27 @@ from sklearn.metrics import accuracy_score
 data_np=np.array(pd.read_csv('./UCI_CAD.csv'))
 
 
-X=preprocessing.scale(np.array([line[:-1] for line in data_np]))
+X=np.array([line[:-1] for line in data_np])
 y=np.array([line[-1] for line in data_np])
 
-xgb_model=XGBClassifier(n_estimators=5000,nthread=4,
+xgb_model=XGBClassifier(nthread=4,n_estimators=370,
                         silent=False,objective='multi:softmax',
                         scale_pos_weight=1,max_depth=4,min_child_weight=2,
                         seed=1993,gamma=4.4,colsample_bytree=0.1,subsample=0.1,
                         learning_rate=0.1)
-# xgb_model=XGBClassifier()
+
+# # specify your configurations as a dict
+# param_grid_xgboost={'n_estimators':np.arange(300,400,10)}
+# start_time=time.clock()
+# grid_lgb=GridSearchCV(xgb_model,param_grid_xgboost,cv=5,scoring='accuracy')
+# grid_lgb.fit(X,y)
+# endtime=time.clock()
+# print('score',grid_lgb.grid_scores_)
+# print('Xgboost_best_estimator_',grid_lgb.best_estimator_)
+# print('Xgboost_best_score_',grid_lgb.best_score_)
+# print('Xgboost_best_params_',grid_lgb.best_params_)
+# print("run_time",endtime-start_time)
+
 start_time=time.clock()
 score_all=0
 kf=KFold(n_splits=5,shuffle=True)
