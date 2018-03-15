@@ -7,7 +7,7 @@ from sklearn.model_selection import KFold
 from sklearn.grid_search import GridSearchCV
 
 
-data_np=np.array(pd.read_csv('../xgboost_demo/dataSetCon_uci.csv'))
+data_np=np.array(pd.read_csv('./UCI_CAD.csv'))
 
 
 X=preprocessing.scale(np.array([line[:-1] for line in data_np]))
@@ -15,7 +15,7 @@ y=np.array([line[-1] for line in data_np])
 
 xgb_model=XGBClassifier(n_estimators=5000,nthread=4,
                         silent=False,objective='multi:softmax',
-                        scale_pos_weight=1,max_depth=3,min_child_weight=2,
+                        scale_pos_weight=1,max_depth=4,min_child_weight=2,
                         seed=1993,gamma=4.4,colsample_bytree=0.1,subsample=0.1,
                         learning_rate=0.1)
 
@@ -31,7 +31,7 @@ start_time=time.clock()
 # print('Xgboost_best_params_',grid_xgboost.best_params_)
 # print("run_time",endtime-start_time)
 score_all=0
-kf=KFold(n_splits=10,shuffle=True)
+kf=KFold(n_splits=5)
 for train,test in kf.split(X):
     X_train=X[train]
     X_test=X[test]
@@ -42,7 +42,7 @@ for train,test in kf.split(X):
     score=np.sum(preds==y_test)/len(y_test)
     print("score:",score)
     score_all=score_all+score
-print("score_all",score_all/10)
+print("score_all",score_all/5)
 endtime=time.clock()
 print("run_time",endtime-start_time)
 
