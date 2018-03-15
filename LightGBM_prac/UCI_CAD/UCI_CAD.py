@@ -28,9 +28,6 @@ lgb=LGBMClassifier(objective='multiclass',boosting_type='goss',num_leaves=10,
 # print("run_time",endtime-start_time)
 
 
-
-
-
 start_time=time.clock()
 score_all=0
 kf=KFold(n_splits=5,shuffle=True)

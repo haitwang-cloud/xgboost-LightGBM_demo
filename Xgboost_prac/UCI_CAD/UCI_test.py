@@ -22,13 +22,13 @@ xgb_model=XGBClassifier(nthread=4,n_estimators=370,
 # # specify your configurations as a dict
 # param_grid_xgboost={'n_estimators':np.arange(300,400,10)}
 # start_time=time.clock()
-# grid_lgb=GridSearchCV(xgb_model,param_grid_xgboost,cv=5,scoring='accuracy')
-# grid_lgb.fit(X,y)
+# grid_xgb=GridSearchCV(xgb_model,param_grid_xgboost,cv=5,scoring='accuracy')
+# grid_xgb.fit(X,y)
 # endtime=time.clock()
-# print('score',grid_lgb.grid_scores_)
-# print('Xgboost_best_estimator_',grid_lgb.best_estimator_)
-# print('Xgboost_best_score_',grid_lgb.best_score_)
-# print('Xgboost_best_params_',grid_lgb.best_params_)
+# print('score',grid_xgb.grid_scores_)
+# print('Xgboost_best_estimator_',grid_xgb.best_estimator_)
+# print('Xgboost_best_score_',grid_xgb.best_score_)
+# print('Xgboost_best_params_',grid_xgb.best_params_)
 # print("run_time",endtime-start_time)
 
 start_time=time.clock()
