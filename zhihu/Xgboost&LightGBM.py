@@ -4,7 +4,7 @@ import lightgbm as lgb
 from sklearn.grid_search import GridSearchCV
 import time
 
-data_train=pd.read_csv('train.csv')
+data_train=pd.read_csv('dataset.csv')
 y_train=data_train.pop('follower')
 X_train=data_train
 print(X_train.shape,y_train.shape)
@@ -18,7 +18,7 @@ param_xgb_list={
     "learning_rate":[0.05]
 
 }
-grid_xgb=GridSearchCV(model_xgb,param_grid=param_xgb_list,cv=5,verbose=10,n_jobs=-1,scoring='r2')
+grid_xgb=GridSearchCV(model_xgb,param_grid=param_xgb_list,cv=4,verbose=10,n_jobs=-1,scoring='r2')
 start_time=time.clock()
 grid_xgb.fit(X_train,y_train)
 endtime=time.clock()
@@ -36,7 +36,7 @@ param_lgb_list={
     "num_leaves":[600],
 
 }
-grid_lgb=GridSearchCV(model_lgb,param_grid=param_lgb_list,cv=5,verbose=10,n_jobs=-1,scoring='r2')
+grid_lgb=GridSearchCV(model_lgb,param_grid=param_lgb_list,cv=4,verbose=10,n_jobs=-1,scoring='r2')
 start_time=time.clock()
 grid_lgb.fit(X_train,y_train)
 endtime=time.clock()
